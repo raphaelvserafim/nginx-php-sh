@@ -229,23 +229,23 @@ EOF
     echo "Subdomínio http://$SUBDOMINIO configurado com sucesso!"
 }
 
-# Menu principal
+ # 🌐 Main Menu
 while true; do
     echo ""
-    echo "Selecione a etapa que deseja executar:"
-    echo "1) Atualizar sistema"
-    echo "2) Instalar Nginx"
-    echo "3) Instalar PHP"
-    echo "4) Instalar MySQL + usuário"
-    echo "5) Instalar phpMyAdmin"
-    echo "6) Executar tudo"
-    echo "7) Adicionar domínio"
-    echo "8) Adicionar subdomínio"
-    echo "9) Instalar Certbot"
-    echo "0) Sair"
-    read -p "Opção: " opcao
+    echo "🔧 Select the step you want to execute:"
+    echo "1) 🔄 Update system"
+    echo "2) 🌐 Install Nginx"
+    echo "3) 🐘 Install PHP"
+    echo "4) 🗄️ Install MySQL + create user"
+    echo "5) 🧰 Install phpMyAdmin"
+    echo "6) 🚀 Run all steps"
+    echo "7) ➕ Add domain"
+    echo "8) 🧩 Add subdomain"
+    echo "9) 🔐 Install Certbot (SSL)"
+    echo "0) ❌ Exit"
+    read -p "Option: " option
 
-    case $opcao in
+    case $option in
         1) update_system ;;
         2) install_nginx ;;
         3) install_php ;;
@@ -255,7 +255,7 @@ while true; do
         7) add_domain_site ;;
         8) add_subdomain_site ;;
         9) install_certbot ;;
-        0) echo "Saindo..."; break ;;
-        *) echo "Opção inválida. Tente novamente." ;;
+        0) echo "Exiting... 👋"; break ;;
+        *) echo "❗ Invalid option. Please try again." ;;
     esac
 done
