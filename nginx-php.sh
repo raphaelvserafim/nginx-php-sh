@@ -21,7 +21,7 @@ install_certbot() {
 
 # Função: Instalar PHP
 install_php() {
-    sudo apt install php8.1 php8.1-fpm php8.1-mysql php8.1-curl php8.1-mbstring php8.1-xml php8.1-zip php8.1-cli php8.1-gd unzip -y
+    sudo apt install php8.1 php8.1-fpm php8.1-mysql php8.1-curl php8.1-mbstring php8.1-xml php8.1-zip php8.1-cli php8.1-gd unzip composer -y
     sudo systemctl enable php8.1-fpm
     sudo systemctl start php8.1-fpm
 }
