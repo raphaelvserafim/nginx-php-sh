@@ -21,9 +21,9 @@ install_certbot() {
 
 # Função: Instalar PHP
 install_php() {
-    sudo apt install php8.1 php8.1-fpm php8.1-mysql php8.1-curl php8.1-mbstring php8.1-xml php8.1-zip php8.1-cli php8.1-gd unzip composer -y
-    sudo systemctl enable php8.1-fpm
-    sudo systemctl start php8.1-fpm
+     sudo apt install php libapache2-mod-php php-mysql php-fpm php-mysql php-curl php-xml php-mbstring php-zip -y
+     sudo apt install --no-install-recommends php8.1 -y
+     sudo apt-get install -y php8.1-cli php8.1-common php8.1-mysql php8.1-zip php8.1-gd php8.1-mbstring php8.1-curl php8.1-xml php8.1-bcmath -y
 }
 
 
@@ -40,7 +40,7 @@ install_mysql() {
     read -s -p "Informe a senha para o novo usuário: " MYSQL_PASS
     echo
 
-    sudo mysql -e "CREATE USER '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASS}';
+    sudo mysql -e "CREATE USER '${MYSQL_USER}'@'%' IDENTIFIED WITH authentication_plugin BY '${MYSQL_PASS}';
     GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USER}'@'%' WITH GRANT OPTION;
     FLUSH PRIVILEGES;"
 
@@ -52,15 +52,15 @@ install_mysql() {
 
 # Função: Instalar phpMyAdmin
 install_phpmyadmin() {
+     
     sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl -y
     sudo phpenmod mbstring
-    sudo systemctl restart php8.1-fpm
-
+    
     read -p "Informe o subdomínio para phpMyAdmin (ex: mysql.seusite.com): " SUBDOMINIO
 
     sudo tee /etc/nginx/sites-available/$SUBDOMINIO > /dev/null <<EOF
 server {
-    listen 80;
+
     server_name $SUBDOMINIO;
 
     root /usr/share/phpmyadmin;
@@ -111,7 +111,7 @@ add_domain_site() {
 
     sudo tee /etc/nginx/sites-available/$DOMINIO.conf > /dev/null <<EOF
 server {
-    listen 80;
+     
     server_name $DOMINIO www.$DOMINIO;
     root $RAIZ;
     index index.php index.html;
@@ -179,7 +179,7 @@ add_subdomain_site() {
 
     sudo tee /etc/nginx/sites-available/$SUBDOMINIO.conf > /dev/null <<EOF
 server {
-    listen 80;
+    
     server_name $SUBDOMINIO;
     root $RAIZ;
     index index.php index.html;
