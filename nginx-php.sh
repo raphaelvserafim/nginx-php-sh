@@ -2,6 +2,8 @@
 
 # Função: Atualização do sistema
 update_system() {
+    curl -4 ifconfig.me 
+
     sudo apt update && sudo apt upgrade -y
 }
 
